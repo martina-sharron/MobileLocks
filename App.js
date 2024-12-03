@@ -1,15 +1,14 @@
-// App.js
-import React from 'react';
-import { Provider } from 'react-redux';
+import React from 'react'
+import { Provider } from 'react-redux'
 import { store } from './ReduxPattern/store'
 import PatternLock from './ReduxPattern/PatternLock'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import LockScreenImage from './ReduxPattern/LockScreen';
-import { enableScreens } from 'react-native-screens';
+import LockScreenImage from './ReduxPattern/LockScreen'
+import { enableScreens } from 'react-native-screens'
 import { StatusBar } from 'react-native';
 
-enableScreens();
+enableScreens()
 const Stack = createNativeStackNavigator()
 
 const App = () => (
