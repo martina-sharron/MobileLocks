@@ -1,47 +1,47 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ImageBackground } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { setPin, verifyPin, resetPin } from './PinLockSlice';
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ImageBackground } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
+import { setPin, verifyPin, resetPin } from './PinLockSlice'
 
 const PinLockScreen = () => {
     const dispatch = useDispatch();
-    const { pin, isPinSet, isError } = useSelector((state) => state.pinLock);
-    const [inputPin, setInputPin] = useState('');
-    const [confirmPin, setConfirmPin] = useState('');
+    const { pin, isPinSet, isError } = useSelector((state) => state.pinLock)
+    const [inputPin, setInputPin] = useState('')
+    const [confirmPin, setConfirmPin] = useState('')
 
     const handleSetPin = () => {
         if (inputPin.length >= 4 && inputPin.length <= 16 && inputPin === confirmPin) {
-            dispatch(setPin(inputPin));
-            setInputPin('');
-            setConfirmPin('');
-            Alert.alert("PIN Set", "Your PIN has been set successfully.");
+            dispatch(setPin(inputPin))
+            setInputPin('')
+            setConfirmPin('')
+            Alert.alert("PIN Set", "Your PIN has been set successfully.")
         } else if (inputPin !== confirmPin) {
-            Alert.alert("PIN Mismatch", "Both PIN entries must match.");
+            Alert.alert("PIN Mismatch", "Both PIN entries must match.")
         } else {
-            Alert.alert("Invalid PIN", "PIN must be between 4 and 16 digits.");
+            Alert.alert("Invalid PIN", "PIN must be between 4 and 16 digits.")
         }
-    };
+    }
 
     const handleVerifyPin = () => {
-        dispatch(verifyPin(inputPin));
+        dispatch(verifyPin(inputPin))
 
-        // Delay the check for `isError` to ensure Redux state updates
+        
         setTimeout(() => {
             if (isError) {
-                Alert.alert("Error", "Invalid PIN. Try again.");
+                Alert.alert("Error", "Invalid PIN. Try again.")
             } else {
-                Alert.alert("Unlocked", "Access granted!");
+                Alert.alert("Unlocked", "Access granted!")
             }
-            setInputPin('');
+            setInputPin('')
         }, 100); // Delay to allow Redux state to update
     };
 
     const handleResetPin = () => {
-        dispatch(resetPin());
-        setInputPin('');
-        setConfirmPin('');
-        Alert.alert("Reset", "Reset a new PIN.");
-    };
+        dispatch(resetPin())
+        setInputPin('')
+        setConfirmPin('')
+        Alert.alert("Reset", "Reset a new PIN.")
+    }
 
     return (
         <View style={styles.container}>
@@ -98,10 +98,10 @@ const PinLockScreen = () => {
                 {isError && <Text style={styles.errorText}>Incorrect PIN, try again.</Text>}
             </ImageBackground>
         </View>
-    );
-};
+    )
+}
 
-export default PinLockScreen;
+export default PinLockScreen
 
 const styles = StyleSheet.create({
     container: {
@@ -153,4 +153,4 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginTop: 10,
     },
-});
+})
